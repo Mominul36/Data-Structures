@@ -10,6 +10,8 @@ node* insertbegin(node * head, int data)
 {
     node * temp=(node *)malloc(sizeof(node));
     temp->data=data;
+    temp->next=NULL;
+
     temp->next=head;
     return temp;
 
@@ -17,9 +19,10 @@ node* insertbegin(node * head, int data)
 node * insertend(node* head, int data)
 {
        node * temp=(node *)malloc(sizeof(node));
-       node* tail=head;
        temp->data=data;
        temp->next=NULL;
+       node* tail=head;
+
        if(tail==NULL)
         return temp;
         while(tail!=NULL)
@@ -64,7 +67,7 @@ node* removepos(node* head,int pos)
     if(pos==0)
     {
        front=front->next;
-       return front;     
+       return front;
     }
     int index=0;
     while(1)
@@ -131,7 +134,7 @@ node* reverse(node* head)
     {
         node* current = head;
         node *front = NULL, *back = NULL;
- 
+
         while (current != NULL) {
             back = current->next;
             current->next = front;
@@ -150,34 +153,69 @@ void print(node *head)
     }
     cout<<endl;
 }
-node* inputlist()
+node* input(int n)
 {
-    node* temp=new node;
-    long n,d;
-    cout<<"Enter number of element: ";
-    cin>>n;
+   node *head=NULL,*current=NULL,*temp=NULL;
+    current=head;
+    int d;
     for(int i=1;i<=n;i++)
     {
         cin>>d;
+        temp = (node *)malloc(sizeof(node*));
         temp->data=d;
-        temp->next=temp;
+        temp->next=NULL;
+        if(head==NULL)
+        {
+            head=temp;
+           current=temp;
+           continue;
+        }
+
+        current->next=temp;
+        current=current->next;
     }
-    //temp->next=NULL;
-    return temp;
+return head;
 }
 int main()
 {
-     node* first,*second,*third;
-     first=(node *) malloc(sizeof(node*));
-     second= (node *)malloc(sizeof(node*));
-     third=(node*)malloc(sizeof(node*));
-     first->data=10;
-     first->next=second;
-     second->data=20;
-     second->next=third;
-     third->data=30;
-     third->next=NULL;
-     print(first);
-    first=reverse(first);
-     print(first);
+   node *head=NULL;
+   int n;
+   cout<< "Enter number of element: ";
+   cin>>n;
+   cout<< "Enter "<<n<< " number: ";
+   head=input(n);
+   cout<< "After input = ";
+   print(head);
+
+   head= insertend(head,100); //value=100
+   cout<< "After insert end: ";
+   print(head);
+
+   head= insertbegin(head,200);//value=200
+   cout<< "After insert begin: ";
+   print(head);
+
+   head= insertbetween(head,5,10);// position=5(start from 0) and value=10
+   cout<< "After insert between: ";
+   print(head);
+
+   head= removebegin(head);
+   cout<< "After remove begin: ";
+   print(head);
+
+   head= removeend(head);
+   cout<< "After remove end: ";
+   print(head);
+
+   head= removepos(head,4); //position=4(start from 0)
+   cout<< "After remove a value in a specific position: ";
+   print(head);
+
+   head= removevalue(head,9); //value=9
+   cout<< "After remove a specific value: ";
+   print(head);
+
+   head= reverse(head);
+   cout<< "After reverse: ";
+   print(head);
 }
