@@ -2,7 +2,7 @@
 using namespace std;
 int top=-1;
 int capacity=10000;
-class stac
+class Stack
 {
   int a[10000];
 public:
@@ -12,7 +12,7 @@ public:
 };
 int main()
 {
-    stac s;
+    Stack s;
 
     s.pop();
     s.push(1);
@@ -22,7 +22,7 @@ int main()
     s.print();
     
 }
-stac :: void push(int x)
+Stack :: void push(int x)
   {
       if(top>=capacity-1)
       cout<< "Stack is full"<<endl;
@@ -33,14 +33,14 @@ stac :: void push(int x)
       }
 
 }
-stac :: void pop()
+Stack :: void pop()
 {
        if(top<0)
         cout<< "stack is empty"<<endl;
        else
          top--;
 }
-stac :: void print()
+Stack :: void print()
 {
       for(int i=0;i<=top;i++)
         cout<<a[i]<< " ";
