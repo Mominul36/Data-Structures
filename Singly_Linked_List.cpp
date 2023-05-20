@@ -17,6 +17,7 @@ Node* pop_back(Node* head);
 Node* pop_front(Node* head);
 Node* erase_value(Node* head, int value);
 Node* erase(Node* head, int index);//index start from zero
+Node* reverse(Node* head);
 int size(Node* head);
 int empty(Node* head);
 int max(Node* head);
@@ -265,6 +266,19 @@ Node* erase(Node* head, int index)
     tail=tail->next;
     current->next=tail;
     return head;
+}
+Node* reverse(Node* head)
+{
+    Node* prev=NULL, *current=NULL, *next=NULL;
+    current=head;
+    while(current!=NULL)
+    {
+        next=current->next;
+        current->next=prev;
+        prev=current;
+        current=next;
+    }
+    return prev;
 }
 int size(Node* head)
 {
